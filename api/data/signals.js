@@ -6,7 +6,7 @@ export default async function handler(req, res) {
     const data = view === "latest"
       ? await getLatestPerCompany()
       : await querySignals({ company, filingType: type, limit: 50 });
-    res.setHeader("Cache-Control", "s-maxage=3600, stale-while-revalidate");
+    res.setHeader("Cache-Control", "no-store");
     return res.status(200).json(data);
   } catch (err) {
     return res.status(500).json({ error: err.message });
