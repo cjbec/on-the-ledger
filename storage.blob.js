@@ -10,6 +10,7 @@ const KEYS = {
 async function readBlob(key) {
   try {
     const { blobs } = await list({ prefix: key });
+    console.log(`[readBlob] list(${key}) → ${blobs.length} results: ${blobs.map(b => b.pathname).join(", ") || "none"}`);
     const match = blobs.find((b) => b.pathname === key);
     if (!match) {
       console.log(`[readBlob] No blob found for key: ${key}`);
