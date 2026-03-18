@@ -4,7 +4,7 @@
     "ticker": "BILL",
     "cik": "0001786352",
     "focus": null,
-    "rssFeed": "https://www.businesswire.com/rss/home/?rss=G22&rss=G1&rss=G22",
+    "rssFeed": null,
     "irPage": "https://investor.bill.com"
   },
   {
@@ -12,7 +12,7 @@
     "ticker": "INTU",
     "cik": "0000896878",
     "focus": "QuickBooks — focus on QuickBooks Online, SMB payments, QuickBooks Money, and small business customer metrics only. Exclude TurboTax, Credit Karma, and Mailchimp signals.",
-    "rssFeed": "https://investors.intuit.com/rss",
+    "rssFeed": null,
     "irPage": "https://investors.intuit.com"
   },
   {
@@ -20,7 +20,7 @@
     "ticker": null,
     "cik": null,
     "focus": "Spend management, corporate cards, AP automation, and customer retention signals",
-    "rssFeed": "https://ramp.com/blog/feed",
+    "rssFeed": null,
     "irPage": null
   },
   {
