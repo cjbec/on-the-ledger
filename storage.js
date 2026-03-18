@@ -126,7 +126,7 @@ async function getMeta() {
 }
 
 function dedupeKey(signal) {
-  return `${signal.company}__${signal.filingType}__${signal.filingDate}`;
+  return `${signal.company}__${signal.filingType}__${signal.filingDate}__v2`;
 }
 
 function currentMonthKey() {
