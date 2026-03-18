@@ -1,0 +1,42 @@
+[
+  {
+    "name": "Bill.com",
+    "ticker": "BILL",
+    "cik": "0001786352",
+    "focus": null,
+    "rssFeed": "https://www.businesswire.com/rss/home/?rss=G22&rss=G1&rss=G22",
+    "irPage": "https://investor.bill.com"
+  },
+  {
+    "name": "Intuit",
+    "ticker": "INTU",
+    "cik": "0000896878",
+    "focus": "QuickBooks — focus on QuickBooks Online, SMB payments, QuickBooks Money, and small business customer metrics only. Exclude TurboTax, Credit Karma, and Mailchimp signals.",
+    "rssFeed": "https://investors.intuit.com/rss",
+    "irPage": "https://investors.intuit.com"
+  },
+  {
+    "name": "Ramp",
+    "ticker": null,
+    "cik": null,
+    "focus": "Spend management, corporate cards, AP automation, and customer retention signals",
+    "rssFeed": "https://ramp.com/blog/feed",
+    "irPage": null
+  },
+  {
+    "name": "Plastiq",
+    "ticker": null,
+    "cik": null,
+    "focus": "B2B payments, SMB customer growth, and platform usage signals",
+    "rssFeed": null,
+    "irPage": null
+  },
+  {
+    "name": "Nickel",
+    "ticker": null,
+    "cik": null,
+    "focus": "SMB banking, fintech CS signals, customer onboarding and retention",
+    "rssFeed": null,
+    "irPage": null
+  }
+]
