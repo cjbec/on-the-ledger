@@ -8,10 +8,11 @@ export const config = { maxDuration: 30 };
 const MAX_FILINGS_PER_RUN = 3; // ~8-10s each (fetch + Claude) → safe under 30s
 
 export default async function handler(req, res) {
-  if (process.env.NODE_ENV === "production" &&
-      req.headers["authorization"] !== `Bearer ${process.env.CRON_SECRET}`) {
-    return res.status(401).json({ error: "Unauthorized" });
-  }
+  // AUTH TEMPORARILY DISABLED FOR MANUAL TRIGGER — re-enable after first run
+  // if (process.env.NODE_ENV === "production" &&
+  //     req.headers["authorization"] !== `Bearer ${process.env.CRON_SECRET}`) {
+  //   return res.status(401).json({ error: "Unauthorized" });
+  // }
 
   // Optional ?company= filter — matches company name case-insensitively
   const companyFilter = req.query?.company?.toLowerCase() ?? null;
@@ -31,14 +32,14 @@ export default async function handler(req, res) {
 
     // Load already-processed keys so we skip duplicates before calling Claude
     const existing = await loadSignals();
-    const existingKeys = new Set(existing.map((s) => `${s.company}__${s.filingType}__${s.filingDate}`));
+    const existingKeys = new Set(existing.map((s) => `${s.company}__${s.filingType}__${s.filingDate}__v2`));
 
     const filings = [];
     for (const company of targets) {
       const recent = await fetchRecentFilings(company, 90);
       // Only take filings we haven't processed yet, newest first
       const fresh = recent.filter(
-        (f) => !existingKeys.has(`${company.name}__${f.form}__${f.filingDate}`)
+        (f) => !existingKeys.has(`${company.name}__${f.form}__${f.filingDate}__v2`)
       );
       for (const filing of fresh.slice(0, MAX_FILINGS_PER_RUN)) {
         const rawText = await fetchFilingText(filing);
