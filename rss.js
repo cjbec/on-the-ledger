@@ -12,11 +12,9 @@ function buildGoogleNewsUrl(companyName) {
 }
 
 const INDUSTRY_FEEDS = [
-  { name: "Payments Dive",     url: "https://www.paymentsdive.com/feeds/news/" },
-  { name: "Fintech Futures",   url: "https://www.fintechfutures.com/feed/" },
-  { name: "PYMNTS",            url: "https://www.pymnts.com/feed/" },
-  { name: "SaaStr",            url: "https://www.saastr.com/feed/" },
-  { name: "Business Wire SMB", url: "https://www.businesswire.com/rss/home/?rss=G22" },
+  { name: "Payments Dive", url: "https://www.paymentsdive.com/feeds/news/" },
+  { name: "PYMNTS",        url: "https://www.pymnts.com/feed/" },
+  { name: "SaaStr",        url: "https://www.saastr.com/feed/" },
 ];
 
 const COMPANY_KEYWORDS = {
