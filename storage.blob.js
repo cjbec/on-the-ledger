@@ -11,11 +11,18 @@ async function readBlob(key) {
   try {
     const { blobs } = await list({ prefix: key });
     const match = blobs.find((b) => b.pathname === key);
-    if (!match) return null;
+    if (!match) {
+      console.log(`[readBlob] No blob found for key: ${key}`);
+      return null;
+    }
     const res = await fetch(match.downloadUrl);
-    if (!res.ok) return null;
+    if (!res.ok) {
+      console.log(`[readBlob] Fetch failed for ${key}: ${res.status}`);
+      return null;
+    }
     return await res.json();
-  } catch {
+  } catch (err) {
+    console.error(`[readBlob] Error reading ${key}:`, err.message);
     return null;
   }
 }
