@@ -52,7 +52,10 @@ Extract all Customer Success signals from this filing and return as JSON.`;
     }),
   });
 
-  if (!response.ok) throw new Error(`Claude API error: ${response.status}`);
+  if (!response.ok) {
+    const errBody = await response.json().catch(() => ({}));
+    throw new Error(`Claude API error: ${response.status} — ${errBody.error?.message ?? JSON.stringify(errBody)}`);
+  }
   const data = await response.json();
   const rawText = data.content.map((b) => b.text || "").join("").trim();
 
@@ -136,6 +139,10 @@ async function generateBenchmarkRollup(signals) {
     }),
   });
 
+  if (!response.ok) {
+    const errBody = await response.json().catch(() => ({}));
+    throw new Error(`Claude API error: ${response.status} — ${errBody.error?.message ?? JSON.stringify(errBody)}`);
+  }
   const data = await response.json();
   return data.content.map((b) => b.text || "").join("").trim();
 }
