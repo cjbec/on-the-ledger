@@ -50,7 +50,7 @@ Extract all Customer Success signals from this filing and return as JSON.`;
     },
     body: JSON.stringify({
       model: "claude-sonnet-4-6",
-      max_tokens: 1000,
+      max_tokens: 2000,
       system: systemPrompt,
       messages: [{ role: "user", content: userPrompt }],
     }),
@@ -65,7 +65,8 @@ Extract all Customer Success signals from this filing and return as JSON.`;
 
   let signals;
   try {
-    signals = JSON.parse(rawText);
+    const cleaned = rawText.replace(/^```(?:json)?\s*/i, "").replace(/\s*```$/, "").trim();
+    signals = JSON.parse(cleaned);
   } catch {
     throw new Error(`Failed to parse Claude response as JSON: ${rawText}`);
   }
@@ -110,7 +111,7 @@ async function extractAllSignals(filings) {
         results.push(signal);
         console.log(`  ✓ NRR: ${signal.signals.nrr ?? "not disclosed"}`);
       }
-      await sleep(300);
+      await sleep(2000);
     } catch (err) {
       console.error(`  ✗ Failed for ${filing.company}:`, err.message);
     }
