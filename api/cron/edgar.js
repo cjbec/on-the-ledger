@@ -8,11 +8,10 @@ export const config = { maxDuration: 30 };
 const MAX_FILINGS_PER_RUN = 3; // ~8-10s each (fetch + Claude) → safe under 30s
 
 export default async function handler(req, res) {
-  // AUTH TEMPORARILY DISABLED FOR MANUAL TRIGGER — re-enable after first run
-  // if (process.env.NODE_ENV === "production" &&
-  //     req.headers["authorization"] !== `Bearer ${process.env.CRON_SECRET}`) {
-  //   return res.status(401).json({ error: "Unauthorized" });
-  // }
+  if (process.env.NODE_ENV === "production" &&
+      req.headers["authorization"] !== `Bearer ${process.env.CRON_SECRET}`) {
+    return res.status(401).json({ error: "Unauthorized" });
+  }
 
   // Optional ?company= filter — matches company name case-insensitively
   const companyFilter = req.query?.company?.toLowerCase() ?? null;
