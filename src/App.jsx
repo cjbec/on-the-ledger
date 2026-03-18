@@ -59,6 +59,12 @@ function SignalCard({ signal }) {
         {s.churnRate && <div><span style={{ color: "#6b7280", fontSize: 12 }}>Churn </span><Badge value={s.churnRate} color="#ef4444" /></div>}
         {s.customerCount && <div><span style={{ color: "#6b7280", fontSize: 12 }}>Customers </span><Badge value={s.customerCount} color={color} /></div>}
       </div>
+      {(s.earningsHighlights || s.productRoadmap) && (
+        <div style={{ marginTop: 10, display: "flex", flexDirection: "column", gap: 4, paddingTop: 10, borderTop: "1px solid #f3f4f6" }}>
+          {s.earningsHighlights && <p style={{ margin: 0, fontSize: 13, color: "#374151" }}><strong>Earnings:</strong> {s.earningsHighlights}</p>}
+          {s.productRoadmap && <p style={{ margin: 0, fontSize: 13, color: "#374151" }}><strong>Product:</strong> {s.productRoadmap}</p>}
+        </div>
+      )}
       {(s.churnSignal || s.expansionSignal || s.csInvestment || s.guidance) && (
         <div style={{ marginTop: 10, display: "flex", flexDirection: "column", gap: 4 }}>
           {s.churnSignal && <p style={{ margin: 0, fontSize: 13, color: "#374151" }}><strong>Churn:</strong> {s.churnSignal}</p>}

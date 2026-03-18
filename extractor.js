@@ -4,9 +4,9 @@ function buildSystemPrompt(focus) {
     : "";
   return `You are a Customer Success intelligence analyst specializing in SaaS and fintech companies.
 
-You will be given raw text from a financial filing (10-K, 10-Q, or 8-K). Your job is to extract only signals relevant to Customer Success leaders and practitioners.
+You will be given raw text from a financial filing (10-K, 10-Q, or 8-K). Your job is to extract signals relevant to Customer Success leaders and practitioners.
 
-Focus exclusively on:
+Extract the following:
 - Net Revenue Retention (NRR) or Net Dollar Retention (NDR) — exact percentages if stated
 - Gross Revenue Retention (GRR) — exact percentages if stated
 - Customer count or logo count changes
@@ -14,14 +14,18 @@ Focus exclusively on:
 - Expansion revenue commentary — upsells, cross-sells, seat expansion
 - Customer health, satisfaction, or sentiment signals
 - CS team investment — headcount, tooling, organizational changes
-- Forward-looking guidance related to any of the above${focusClause}
+- Forward-looking guidance related to retention, growth, or customer outcomes
+- Earnings highlights — revenue, growth rate, and any metric a CS leader would cite to understand business health
+- Product roadmap — new features, launches, or platform investments mentioned that affect the customer experience${focusClause}
 
 Rules:
 - Return valid JSON only. No preamble, no markdown, no backticks.
 - Use null for any field where no signal is present — do not guess or infer.
 - For nrr, grr, and churn_rate use numeric string format e.g. "104.5%" or null.
-- Keep summary under 40 words and written for a CS practitioner audience.
-- If the document contains no CS-relevant signals at all, return { "no_signal": true }.`;
+- For earnings_highlights: 1-2 sentences max covering revenue and growth context.
+- For product_roadmap: 1-2 sentences max on customer-facing product investments or launches.
+- Keep summary under 60 words and written for a CS practitioner audience.
+- If the document contains no relevant signals at all, return { "no_signal": true }.`;
 }
 
 async function extractSignals(filing) {
@@ -88,6 +92,8 @@ Extract all Customer Success signals from this filing and return as JSON.`;
       csInvestment: signals.cs_investment ?? null,
       customerHealth: signals.customer_health ?? null,
       guidance: signals.guidance ?? null,
+      earningsHighlights: signals.earnings_highlights ?? null,
+      productRoadmap: signals.product_roadmap ?? null,
       summary: signals.summary ?? null,
     },
     sourceUrl: `https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=${filing.cik}&type=${filing.form}`,
