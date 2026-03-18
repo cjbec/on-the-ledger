@@ -37,7 +37,7 @@ function buildFilingUrl(filing) {
   return `https://www.sec.gov/Archives/edgar/data/${cik}/${accession}/${filing.primaryDocument}`;
 }
 
-async function fetchFilingText(filing, maxChars = 50000) {
+async function fetchFilingText(filing, maxChars = 30000) {
   const url = buildFilingUrl(filing);
   const res = await fetch(url, { headers: HEADERS });
   if (!res.ok) throw new Error(`Failed to fetch filing doc: ${url}`);
