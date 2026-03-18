@@ -13,10 +13,10 @@ const require = createRequire(import.meta.url);
 const companies = require("./companies.json");
 
 const SCHEDULES = {
-  rss:    "0 */6 * * *",
-  edgar:  "0 6 * * *",
-  full:   "0 7 * * 0",
-  rollup: "0 8 1 * *",
+  rss:    "0 7 * * *",
+  edgar:  "0 8 * * *",
+  full:   "0 8 * * *",
+  rollup: "0 9 * * *",
 };
 
 async function runRssOnly() {
