@@ -5,10 +5,7 @@ import {
   initStorage, saveSignals, saveFeedItems,
   getLatestPerCompany, saveRollup, updateMeta,
 } from "./storage.js";
-import { createRequire } from "module";
-
-const require = createRequire(import.meta.url);
-const companies = require("./companies.json");
+import companies from "./companies.json" with { type: "json" };
 
 async function runPipeline() {
   console.log("─── On The Ledger Pipeline ───────────────────────");

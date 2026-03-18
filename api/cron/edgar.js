@@ -1,10 +1,7 @@
 import { fetchRecentFilings, fetchFilingText } from "../../edgar.js";
 import { extractAllSignals } from "../../extractor.js";
 import { saveSignals, updateMeta, initStorage, loadSignals } from "../../storage.blob.js";
-import { createRequire } from "module";
-
-const require = createRequire(import.meta.url);
-const companies = require("../../companies.json");
+import companies from "../../companies.json" with { type: "json" };
 
 export const config = { maxDuration: 30 };
 

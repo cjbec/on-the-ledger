@@ -1,9 +1,6 @@
 import { ingestRssFeeds } from "../../rss.js";
 import { saveFeedItems, initStorage } from "../../storage.blob.js";
-import { createRequire } from "module";
-
-const require = createRequire(import.meta.url);
-const companies = require("../../companies.json");
+import companies from "../../companies.json" with { type: "json" };
 
 export const config = { maxDuration: 30 };
 
