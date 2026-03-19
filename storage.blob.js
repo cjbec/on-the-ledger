@@ -16,7 +16,7 @@ async function readBlob(key) {
       console.log(`[readBlob] No blob found for key: ${key}`);
       return null;
     }
-    const res = await fetch(match.downloadUrl);
+    const res = await fetch(match.url);
     if (!res.ok) {
       console.log(`[readBlob] Fetch failed for ${key}: ${res.status}`);
       return null;
