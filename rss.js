@@ -15,10 +15,11 @@ const INDUSTRY_FEEDS = [
   { name: "Payments Dive", url: "https://www.paymentsdive.com/feeds/news/" },
   { name: "PYMNTS",        url: "https://www.pymnts.com/feed/" },
   { name: "SaaStr",        url: "https://www.saastr.com/feed/" },
+  { name: "TechCrunch",    url: "https://techcrunch.com/category/fintech/feed/" },
 ];
 
 const COMPANY_KEYWORDS = {
-  "Bill.com":  ["bill.com", "bill.com holdings", "BILL"],
+  "Bill.com":  ["bill.com", "bill.com holdings", "bill holdings"],
   "Intuit":    ["intuit", "quickbooks", "quickbooks online", "qbo", "quickbooks money"],
   "Ramp":      ["ramp", "ramp financial", "ramp.com"],
   "Plastiq":   ["plastiq"],
@@ -62,7 +63,10 @@ function stripHtml(str) {
 function matchCompany(item) {
   const searchText = `${item.title} ${item.summary}`.toLowerCase();
   for (const [company, keywords] of Object.entries(COMPANY_KEYWORDS)) {
-    if (keywords.some((kw) => searchText.includes(kw.toLowerCase()))) return company;
+    if (keywords.some((kw) => {
+      const escaped = kw.toLowerCase().replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+      return new RegExp(`\\b${escaped}\\b`).test(searchText);
+    })) return company;
   }
   return null;
 }
